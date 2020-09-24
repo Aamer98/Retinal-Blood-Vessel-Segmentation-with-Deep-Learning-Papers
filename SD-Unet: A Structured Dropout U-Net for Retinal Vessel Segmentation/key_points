@@ -1,1 +1,16 @@
 
+Regular dropout not effective in Fully Convolutional Networks such as U-Nets. A study by researchers at google brain found the dropblock,
+which is essentially a cluster of dropouts as opposed randomly spread out drop outs.
+
+The U-Net architecture is similar to the original except that each 3x3 Conv layer is followed by a dropout block and then a ReLU activation
+function.
+
+Data augmentation was applied: Random arbitrary angle rotation | Colour jitter | Adding Gaussian noise | Horizontal and vertical flips
+
+
+Results:
+
+SD U-Net
+  DRIVE | PPV:0.8335 | TNR:0.9848 | TPR:0.7891 | JS:0.9674 | F1:0.8042 | ACC:0.9674 | AUC:0.9836
+  STARE | PPV:0.0.8605 | TNR:0.0,9899 | TPR:0.7548 | JS:0.9763 | F1:0.8020 | ACC:0.9725 | AUC:0.9850
+  CHASE | PPV:0.8486 | TNR:0.990 | TPR:0.7559 | JS:0.9736 | F1:0.7978 | ACC:0.9738 | AUC:0.9872
