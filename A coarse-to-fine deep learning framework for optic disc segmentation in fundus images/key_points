@@ -1,1 +1,36 @@
+Optic Disk Segmentation
 
+Steps:
+
+ •Blood vessel extraction using method in [33]. Then calculate vessel density map. This is relevant the region around the optic disk has high
+  blood vessel density. The density map show that there is a high intensity of vessels in the optic disk region. The paper states that diseases
+  or abnormalities have little effect on characterisitics of the vessel density map.
+  
+ •The the RGB fundus image and the vessel density map is fed into a U-Net and two segmentation results are output.
+
+ •These results susceptible to large segmentation errors.
+
+ •The two above segmentation results were combined and their overlapped regions were identified. The largest overlapping region was chosen as reliable
+  OD candidate. The region of overlap was then cropped out of the original RGB fundus image.
+
+ •This cropped image patch is 3 times the diameter of the optic disk.
+
+ •The identified circular image patches with three colour channels were then fed into the U-Net model again to perform refined segmentation.
+
+ •They used a dataset they collected themselves from a hospital. The 7615 images were resized to 512x512. The images were manually processed by ophthalmologists 
+  to annotate the disk regions.
+
+ •The annotated ellipse regions were used as ground truths. The images were randomly divided into train, validation and test sets in the ratio of 0.75:0.15:0.1.
+
+U-Net Architecture:
+
+ •In each down convolution block, two 3x3 conv layers with batch normalisation and ReLU activation function. The conv blocks are then followed by a 2x2 max pooling
+  layer with a stride of 2.  
+ •In the decoding part, each block consists of a 2x2 upsampling layer and the same 2 3x3 conv layers followed by batch norm and ReLU.
+ •Skip connections were used to concatenate the feature map from the encoding layer to the decoding layer.
+ •The final decoded results fed into a 1x1 convolutional layer with sigmoid activation function to finalize target regions.
+  
+  
+  
+Performance:
+ • DRIVE | IoU = 84.8% | Se = 87.2% | DLA = 98.4% | MDCP = 4.97
