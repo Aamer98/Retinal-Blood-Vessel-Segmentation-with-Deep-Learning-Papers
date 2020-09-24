@@ -33,4 +33,6 @@ U-Net Architecture:
   
   
 Performance:
- • DRIVE | IoU = 84.8% | Se = 87.2% | DLA = 98.4% | MDCP = 4.97
+ • DIARETDB0 | IoU = 84.8% | Se = 87.2% | DLA = 98.4% | MDCP = 4.97
+ • DIARETDB1 | IoU = 84.9% | Se = 87.2% | DLA = 100.0% | MDCP = 2.75
+ • DRIVE | IoU = 78.3% | Se = 79.4% | DLA = 97.5% | MDCP = 9.57
