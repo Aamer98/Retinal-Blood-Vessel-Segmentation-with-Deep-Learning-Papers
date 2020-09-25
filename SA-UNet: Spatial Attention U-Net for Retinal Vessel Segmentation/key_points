@@ -1,1 +1,10 @@
 
+This architecure uses batch normalization and drop out blocks in the conv blocks of the U-Net. 
+Each convolutional layer is followed by drop block, a batch normalization layer and finally the ReLU activation function.
+
+There is a spatial attention module placed between the encoder and decoder.
+Spatial attention module:
+  From the output of the encoder, the feature map is passed through a max pooling layer and a average pooling layer seperately. These two outputs are
+  then concatenated and fed into a 7x7 Conv layer followed by a sigmoid activation function. The output of the sigmoid activation is then multiplied
+  (element wise) with the original output of the encoder. This is then fed into the decoder.
+  
