@@ -1,10 +1,32 @@
 
 This architecure uses batch normalization and drop out blocks in the conv blocks of the U-Net. 
-Each convolutional layer is followed by drop block, a batch normalization layer and finally the ReLU activation function.
+Each convolutional layer is followed by drop block, a batch normalization layer and finally the ReLU activation function.This convolutional block is 
+used both in the encoder and decoder. The batch normalization was introduced to accelerate network convergence. The dropout block was used to prevent
+overfitting.
+The final layer consists of a 1x1 Conv layer with a sigmoid activation function.
 
 There is a spatial attention module placed between the encoder and decoder.
 Spatial attention module:
   From the output of the encoder, the feature map is passed through a max pooling layer and a average pooling layer seperately. These two outputs are
   then concatenated and fed into a 7x7 Conv layer followed by a sigmoid activation function. The output of the sigmoid activation is then multiplied
   (element wise) with the original output of the encoder. This is then fed into the decoder.
+  
+  The spatial attention module uses spatial attention features to produce a spatial attention map.
+  
+  
+The following augmentation methods were used:
+  Random rotation | Adding Gaussian | Colour jittering | Horizontal, vertical and diagonal flips
+  
+  
+Implementation Details
+  26 and 13 images from DRIVE and CHASE DB1 were chosen randomly as validation sets.
+  150 epochs | 0.001 learning rate for the first 100 epochs | 0.0001 for the remaining 50 epochs
+  
+  Size of discard blocks of dropblock set to 7. For DRIVE, dropout rate set to 0.18 and batch size set to 8. For CHASE DB1, dropout rate set to 0.18 and
+  batch size set to 4.
+  
+Performance: 
+  SA-UNet: 
+    DRIVE | SE = 0.8212 | SP = 0.9840 | SP = 0.9698 | AUC = 0.9864
+    DRIVE | SE = 0.8573 | SP = 0.9835 | SP = 0.9755 | AUC = 0.9905
   
