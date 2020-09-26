@@ -1,1 +1,9 @@
 
+The model is designed on the principle that human annotators will segment raw images in 'multiple stages.'
+
+There are two architectures present in this model. The regular U Net architecture,followed by simpler versions of U Net termed is mini-Unet (refinery modules).
+The mini-Unet used the output of the second to last layer of the preceding module (which consists of 32 channel feature map) as input.
+
+**Note that when Regular Unets were used intead of mini-Unets, the performance was worse.**
+
+The refinery modules (mini Unets) all consist of the same weights and biases.
